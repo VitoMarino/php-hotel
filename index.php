@@ -58,32 +58,29 @@
 
         </h1>
 
-        <p>
-            <?php
-            foreach($hotels as $hotel){
-
-                
-
-            };
-
-                
-            ?>
-        </p>
-
-        
         <form class="text-center" action="./index.php" method="GET">
-            <input type="checkbox" name="filtra" id="filtra">
+            <label for="">Seleziona per cercare Hotel con parcheggio</label>
+            <input type="checkbox" name="filtra" id="filtra"> <br>
+
+            <label for="">Seleziona stelle</label>
+            <select name="select" id="select">
+                <option value="">1</option>
+                <option value="">2</option>
+                <option value="">3</option>
+                <option value="">4</option>
+                <option value="">5</option>
+            </select> <br>
+
             <button class="button" type="submit">Cerca</button>
         </form>
-
-        
 
         <table class="table mt-5">
             <tbody>
                 <tr>
                     <th scope="col"> Nome Hotel </th>
                         <?php foreach ($hotels as $key => $hotel) { ?>
-                            <td scope="row"> <?php if(isset($_GET['filtra'])) {
+                            <td scope="row"> <?php 
+                            if(isset($_GET['filtra'])) {
                                 // qui l'utente ha selezionato la checkbxo per gli hotel con parcheggio
                                 // se l'hotel ha il parcheggio, allora lo stampo, altrimenti niente
                                 if($hotel["parking"] === true){
@@ -106,8 +103,16 @@
                 <tr>
                     <th scope="col">Voto</th>
                         <?php foreach ($hotels as $key => $hotel) { ?>
-                            <td scope="row"> <?php echo $hotel["vote"] ?> </td>
-                        <?php } ?>
+                            <td scope="row"> 
+                                <?php 
+                                if(isset($_GET["select"])){
+                                    if ($hotel["vote"] <= 5){
+                                        echo $hotel["vote"];
+                                    } else {
+                                    echo $hotel["vote"];
+                                    }
+                                    } ?> </td>
+                                <?php } ?>
                 </tr>
 
                 <tr>
